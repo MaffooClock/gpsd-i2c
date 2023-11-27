@@ -47,7 +47,7 @@ sudo apt install python3 python3-smbus2 socat
 
 Also, your GPS module needs to be configured to output NMEA on its I²C interface (or DDC on u-blox, maybe others).  I would assume that if your GPS module has an I²C port, that it would be outputting data to it by default, but you might consult the documentation for your module to be certain.
 
-> **Note** 
+> [!IMPORTANT] 
 > The Python script in this utility only looks for and handles valid NMEA 0183 sentences -- anything else, such as UBX or RTMC or other protocols will be silently ignored.
 
 
@@ -128,7 +128,7 @@ Of course, you don't have to install this into `/opt` -- anywhere you prefer is 
 
 If the service starts, then you should see a new virtual serial port in `/dev/gpsd0`.  You can change the name of this device, if necessary, by editing the [gpsd-i2c.service](gpsd-i2c.service) file.
 
-> **Note**
+> [!TIP]
 > Don't forget to execute `systemctl daemon-reload` after editing the service file.
 
 You can monitor the status with:
