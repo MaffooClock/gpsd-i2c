@@ -1,9 +1,21 @@
 #!/usr/bin/env python3
 
-# Configure these as necessary:
-I2C_BUS = 0
-I2C_ADDRESS = 0x42
+import os
+def parse_int(val, default):
+    try:
+        result = int(val)
+    except (TypeError, ValueError):
+        try:
+            result = int(val,16)
+        except (TypeError, ValueError):
+            result = default
+    except Exception:
+        result = default
+    return result
 
+# Default to device 0-0042; can be overriden via environment
+I2C_BUS = parse_int(os.environ.get("I2C_BUS", None), 0)
+I2C_ADDRESS = parse_int(os.environ.get("I2C_ADDRESS", None), 0x42)
 
 ##### Don't edit anything below this line #####
 
