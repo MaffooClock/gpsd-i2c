@@ -102,26 +102,26 @@ For other Linux distributions, it might not be this simple -- for instance, in A
    git clone https://github.com/MaffooClock/gpsd-i2c.git
    ```
    
-2. Edit [gpsd-i2c.py](gpsd-i2c.py) and set the I²C bus and address of your GPS module.
-
-3. Test the service:
+2. Test the service (use the I²C bus and address of your GPS module):
    ```bash
-   python3 /opt/gpsd-i2c/gpsd-i2c.py
+   I2C_BUS=0 I2C_ADDRESS=0x42 python3 /opt/gpsd-i2c/gpsd-i2c.py
    ```
    If everything is correct, you should immediately see a bunch of NMEA sentences in the console.  Just <kbd>Ctrl</kbd>+<kbd>C</kbd> to stop, and then continue with the remaining steps below.
    
    If not, you'll need to resolve whatever errors you see before proceeding.
    
-4. Setup the systemd service:
+3. Setup the systemd service (use the I²C bus and address of your GPS module):
    ```bash
    cd /opt/gpsd-i2c
    cp gpsd-i2c.service /etc/systemd/system/
+   mkdir /etc/systemd/system/gpsd-i2c.service.d/
+   printf "[Service]\nEnvironment=I2C_BUS=0 I2C_ADDRESS=0x42\n" > \
+     /etc/systemd/system/gpsd-i2c.service.d/override.conf
    ```
 
-5. Start the service automatically on boot:
+4. Start the service automatically on boot:
    ```bash
-   systemctl enable gpsd-i2c.service
-   systemctl start gpsd-i2c.service
+   systemctl enable --now gpsd-i2c.service
    ```
 
 Of course, you don't have to install this into `/opt` -- anywhere you prefer is fine, just be sure to update the `WorkingDirectory=` line in the [gpsd-i2c.service](gpsd-i2c.service) file.
