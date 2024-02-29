@@ -54,7 +54,7 @@ def readGPS():
 
     try:
         while True:
-            c = BUS.read_byte( ADDRESS )
+            c = BUS.read_byte( I2C_ADDRESS )
             if c == 255:
                 return False
 
