@@ -19,6 +19,10 @@ This utility enables you to use other tools to read or configure your GPS module
 For example, this would be perfect for enabling the use of [u-center](https://www.u-blox.com/en/product/u-center) for u-blox modules -- just need a simple TCP-to-serial redirect, and you can remotely monitor or configure your u-blox module while GPSD is running.
 
 
+> [!TIP]
+> There is a C version of this, which is lean and also bidirectional, by Antonio Galea: [ant9000/ublox-i2c-bridge](https://github.com/ant9000/ublox-i2c-bridge)
+
+
 ### How this works
 
 This utility uses a Python script to continuously read a data stream from a particular I²C device, parse the data to ensure it's a NMEA 0183 sentence (including verifying the checksum), then dump it to `stdout`.
